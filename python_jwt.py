@@ -30,6 +30,7 @@ def get_user_info(id_token):
         # algorithms 签名算法，默认RS256
         # aud : audience 受众，在JWT应用详情中获取，这里指定不校验aud，如需校验，请传入audience,如下
         # token_info = jwt.decode(force_bytes(id_token), key=public_key, algorithms="RS256", audience='testplugin_jwt')
+        # 注意防重放攻击，需要判断id_token是否已经使用过了，可以存放jti来达到该效果
         user_info = json.loads(json.dumps(token_info))
         username = user_info['sub']
         print(username)
